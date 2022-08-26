@@ -42,12 +42,12 @@ class Graph:
 			x_coordinates.append(i[0])
 			y_coordinates.append(i[1])
 
-		i, num_column, space, y_coordinates, x_coordinates, num_coor = max(y_coordinates), len(y_coordinates), 26 - max(x_coordinates), sorted(y_coordinates)[::-1], sorted(x_coordinates), 0
+		i, num_column, space, y_coordinates, x_coordinates, num_coor = max(y_coordinates), len(y_coordinates), 26 - int(max(x_coordinates)), sorted(y_coordinates)[::-1], sorted(x_coordinates), 0
 
 		while i > 0:
-			print(i, end = ' ' * (space - len(str(i)) + 1))
-			print("")
-			for j in range(max(x_coordinates) + 1):
+			print("{0:.1f}".format(i), end = ' ' * (space - len(str(i)) + 1))
+			# print("")
+			for j in range(int(max(x_coordinates)) + 1):
 				if (j, i) in coordinates:
 					print("o", end = ' ' * space)
 				else:
@@ -57,14 +57,14 @@ class Graph:
 
 		num_row, space = max(x_coordinates) + 1, 26 - max(x_coordinates)
 		print(' ', end = '')
-		for i in range((space + 1) * num_row):
+		for i in range((int(space) + 1) * int(num_row)):
 			print("-", end = '')
 		print(">", end = '')
 		print("")
 
-		print(' ', end = ' ' * space)
-		for i in range(max(x_coordinates) + 1):
-			print(i, end = ' ' * (space - len(str(i)) + 1))
+		print(' ', end = ' ' * int(space))
+		for i in range(int(max(x_coordinates)) + 1):
+			print(i, end = ' ' * (int(space) - len(str(i)) + 1))
 
 
 
@@ -84,9 +84,17 @@ for i in range(50):
 
 
 graph =  Graph()
-graph.draw_graph_bar_row_column(["house", "gym", "office"], [1, 5, 4])
+graph.draw_graph_bar_row_column(["house", "gym", "office", "school"], [1, 5, 4, 7])
 graph.draw_graph_bar_row_column(list(has.keys()), list(has.values()))
-graph.draw_graph_point_row_column([(1, 2), (3, 4), (9, 6), (12, 13), (21, 9)])
+x = [0.020,0.050,0.070,0.100,0.150,0.200]
+y = [0.28, 0.70, 0.97, 1.39, 2.12, 2.79]
+points = []
+for i in range(len(x)):
+	points.append((x[i], y[i]))
+
+	
+graph.draw_graph_point_row_column([(1, 2), (3, 4), (9, 6), (12, 13), (21, 9), (6, 9), (4, 5), (9, 10)])
+graph.draw_graph_point_row_column(points)
 # graph.draw_graph_point_row_column([(1.3, 2.4), (3.1, 4.9), (5.3, 6.5)])
 
 
